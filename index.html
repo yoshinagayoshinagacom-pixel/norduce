@@ -10,7 +10,7 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
-    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-family: "Times New Roman", Times, serif;
     background: #ffffff;
     color: #1a1a1a;
     overflow-x: hidden;
@@ -171,11 +171,91 @@
     50% { transform: rotate(45deg) translateY(6px); }
   }
 
+  /* ── Mission ── */
+  .mission-statement {
+    font-size: 28px; font-weight: 700; letter-spacing: 4px;
+    color: #1a1a1a; margin-bottom: 32px;
+  }
+  .mission-sub {
+    font-size: 15px; color: #555; line-height: 2.4; letter-spacing: 0.5px;
+  }
+
+
+  /* ── Founder ── */
+  .founder-layout {
+    display: flex; gap: 48px; align-items: center;
+    margin-top: 40px;
+  }
+  .founder-photo {
+    width: 200px; height: 200px; flex-shrink: 0;
+    border-radius: 12px; overflow: hidden;
+    background: #f0f0f0;
+  }
+  .founder-photo img {
+    width: 100%; height: 100%; object-fit: cover;
+  }
+  .founder-name {
+    font-size: 22px; font-weight: 700; letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  .founder-role {
+    font-size: 12px; color: #999; letter-spacing: 2px;
+    margin-bottom: 20px;
+  }
+  .founder-bio {
+    font-size: 14px; color: #555; line-height: 2.2;
+    margin-bottom: 12px;
+  }
+  .founder-contact {
+    display: flex; gap: 24px; margin-top: 16px; flex-wrap: wrap;
+  }
+  .founder-contact a {
+    font-size: 13px; color: #004aad; text-decoration: none;
+    border-bottom: 1px solid #ddd; padding-bottom: 2px;
+    transition: border-color 0.2s;
+  }
+  .founder-contact a:hover { border-color: #004aad; }
+
   /* ── Sections ── */
   section { padding: 140px 24px; max-width: 720px; margin: 0 auto; }
+  .section-header {
+    display: flex; align-items: center; gap: 16px;
+    margin-bottom: 28px;
+  }
+  .section-icon {
+    width: 36px; height: 36px;
+    position: relative; flex-shrink: 0;
+  }
+  .section-icon .si-piece {
+    position: absolute; opacity: 0; transform: scale(0);
+  }
+  .reveal.visible .section-icon .si-piece {
+    opacity: 1; transform: scale(1);
+    transition: opacity 0.25s ease-out, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .reveal.visible .section-icon .si-piece:nth-child(1) { transition-delay: 0.1s; }
+  .reveal.visible .section-icon .si-piece:nth-child(2) { transition-delay: 0.35s; }
+  .reveal.visible .section-icon .si-piece:nth-child(3) { transition-delay: 0.6s; }
+  .reveal.visible .section-icon .si-piece:nth-child(4) { transition-delay: 0.85s; }
+  .section-icon .si-circle {
+    width: 52%; height: 51%; border-radius: 50%;
+    background: #f03949; top: 0%; left: 0%;
+  }
+  .section-icon .si-sq1 {
+    width: 37%; height: 39%; background: #004aad;
+    top: 13%; left: 62%;
+  }
+  .section-icon .si-sq2 {
+    width: 37%; height: 39%; background: #004aad;
+    top: 61%; left: 15%;
+  }
+  .section-icon .si-sq3 {
+    width: 37%; height: 39%; background: #004aad;
+    top: 61%; left: 62%;
+  }
   .section-title {
     font-size: 32px; font-weight: 700; line-height: 1.7;
-    margin-bottom: 28px; letter-spacing: 2px;
+    letter-spacing: 2px;
   }
   .section-body {
     font-size: 15px; color: #555; line-height: 2.4; letter-spacing: 0.5px;
@@ -205,15 +285,25 @@
   .product-link:hover { gap: 14px; }
   .product-link::after { content: '\2192'; }
 
-  /* ── Company table ── */
-  .info-table { width: 100%; margin-top: 40px; border-collapse: collapse; }
+  /* ── Company layout ── */
+  .company-layout {
+    display: flex; gap: 40px; align-items: stretch; margin-top: 40px;
+  }
+  .company-map {
+    flex-shrink: 0; width: 300px;
+  }
+  .company-map iframe {
+    width: 100%; height: 100%; border: none; border-radius: 12px;
+  }
+  .info-table { flex: 1; border-collapse: collapse; }
   .info-table tr { border-bottom: 1px solid #f0f0f0; }
   .info-table tr:last-child { border-bottom: none; }
   .info-table th {
     text-align: left; font-size: 12px; font-weight: 600; color: #aaa;
-    padding: 20px 24px 20px 0; width: 120px; vertical-align: top; letter-spacing: 2px;
+    padding: 12px 16px 12px 0; width: 100px; vertical-align: top; letter-spacing: 2px;
+    white-space: nowrap;
   }
-  .info-table td { font-size: 15px; color: #333; padding: 20px 0; line-height: 1.8; }
+  .info-table td { font-size: 14px; color: #333; padding: 12px 0; line-height: 1.8; }
   .info-table a { color: #004aad; text-decoration: none; }
 
   /* ── Footer ── */
@@ -245,6 +335,11 @@
     .info-table th { width: 80px; font-size: 11px; }
     .hero-logo { max-width: 400px; }
     .nav-logo img { height: 40px; }
+    .mission-statement { font-size: 22px; }
+    .founder-layout { flex-direction: column; align-items: center; text-align: center; }
+    .founder-photo { width: 160px; height: 160px; }
+    .company-layout { flex-direction: column; }
+    .company-map { width: 100%; }
   }
 </style>
 </head>
@@ -264,9 +359,10 @@
       <img src="logomark.svg" alt="Norduce">
     </a>
     <ul class="nav-links" id="navLinks">
+      <li><a href="#mission">Mission</a></li>
       <li><a href="#product">Product</a></li>
+      <li><a href="#founder">Founder</a></li>
       <li><a href="#company">Company</a></li>
-      <li><a href="#contact">Contact</a></li>
     </ul>
     <button class="menu-toggle" id="menuToggle" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -282,9 +378,24 @@
     </div>
   </div>
 
+  <!-- Mission -->
+  <section class="reveal" id="mission">
+    <div class="section-header"><div class="section-icon"><div class="si-piece si-circle"></div><div class="si-piece si-sq1"></div><div class="si-piece si-sq2"></div><div class="si-piece si-sq3"></div></div><h2 class="section-title jp">ミッション</h2></div>
+    <div class="mission-statement">Move Humanity Forward</div>
+    <p class="mission-sub jp">
+      ミッションは「Move Humanity Forward」（「人類を前に進める」）。最新のAI技術を活用してフィットネス、ウェルネス、コーチング、スポーツ、介護など、人々の健康維持・向上を促すサービスを社会に提供します。
+    </p>
+    <p class="mission-sub jp" style="margin-top: 24px;">
+      社名Norduceは「北へ導く」に由来し、クライアントと並走し、常に北を指すコンパスのように人々をより良い方向へ導く会社でありたいというビジョンを表しています。
+    </p>
+    <p class="mission-sub jp" style="margin-top: 24px;">
+      私たちのスローガンは「Aim High, Think Big」（「高く狙え、大きく考えろ」）。この言葉をチーム全員の共通言語とすることで、Norduceは挑戦とイノベーションを止めない会社であり続けます。
+    </p>
+  </section>
+
   <!-- Product -->
   <section class="reveal" id="product">
-    <h2 class="section-title jp">TreMimic</h2>
+    <div class="section-header"><div class="section-icon"><div class="si-piece si-circle"></div><div class="si-piece si-sq1"></div><div class="si-piece si-sq2"></div><div class="si-piece si-sq3"></div></div><h2 class="section-title jp">TreMimic</h2></div>
     <p class="section-body jp">
       パーソナルトレーナーのコミュニケーションをAIで再現し、LINE経由でクライアントに自動対応するSaaS。セッション外の食事指導、モチベーション管理、記録分析を自動化し、トレーナーが本来の指導に集中できる環境を作ります。
     </p>
@@ -297,17 +408,42 @@
     </div>
   </section>
 
+  <!-- Founder -->
+  <section class="reveal" id="founder">
+    <div class="section-header"><div class="section-icon"><div class="si-piece si-circle"></div><div class="si-piece si-sq1"></div><div class="si-piece si-sq2"></div><div class="si-piece si-sq3"></div></div><h2 class="section-title jp">代表</h2></div>
+    <div class="founder-layout">
+      <div class="founder-photo">
+        <img src="images/founder.jpg" alt="橋本善永">
+      </div>
+      <div>
+        <div class="founder-name jp">橋本 善永</div>
+        <div class="founder-role">Norduce株式会社 代表取締役社長</div>
+        <p class="founder-bio jp">国際基督教大学（ICU）4年。大学レスリング部を自ら創立し、3年間主将としてチームを牽引。現在もアスリートとしてプロボクサーのライセンス取得を目指し、日々練習を重ねている。</p>
+        <p class="founder-bio jp">海外経験15年の日英バイリンガル。学生時代にコーチング関連のインターンに取り組む中で、コーチング業界が抱える「事業の拡大と指導の質の両立」という課題に出会い、AIによる解決を決意。Norduce株式会社を創業した。</p>
+        <div class="founder-contact">
+          <a href="mailto:yoshinaga.hashimoto@norduce.co.jp">yoshinaga.hashimoto@norduce.co.jp</a>
+          <a href="tel:08044776326">080-4477-6326</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Company -->
-  <section class="reveal" id="company">
-    <h2 class="section-title jp">会社概要</h2>
-    <table class="info-table">
-      <tr><th>会社名</th><td class="jp">Norduce株式会社</td></tr>
-      <tr><th>代表</th><td class="jp">橋本 善永</td></tr>
-      <tr><th>所在地</th><td class="jp">東京都</td></tr>
-      <tr><th>設立</th><td>2026年</td></tr>
-      <tr><th>事業内容</th><td class="jp">AIソフトウェアの企画・開発・運営</td></tr>
-      <tr><th>URL</th><td><a href="https://norduce.co.jp">norduce.co.jp</a></td></tr>
-    </table>
+  <section class="reveal" id="company" style="max-width:900px;">
+    <div class="section-header"><div class="section-icon"><div class="si-piece si-circle"></div><div class="si-piece si-sq1"></div><div class="si-piece si-sq2"></div><div class="si-piece si-sq3"></div></div><h2 class="section-title jp">会社概要</h2></div>
+    <div class="company-layout">
+      <table class="info-table">
+        <tr><th>会社名</th><td class="jp">Norduce株式会社</td></tr>
+        <tr><th>設立</th><td class="jp">2026年8月3日</td></tr>
+        <tr><th>代表者</th><td class="jp">橋本 善永</td></tr>
+        <tr><th>最高執行責任者</th><td class="jp">宮本 怜旺</td></tr>
+        <tr><th>所在地</th><td class="jp">〒160-0022<br>東京都新宿区新宿2丁目8番15号<br>パークフロント新宿 202号室</td></tr>
+        <tr><th>事業内容</th><td class="jp">AIソフトウェアの企画・開発・運営</td></tr>
+      </table>
+      <div class="company-map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.5!2d139.7095!3d35.6905!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188cd5c3de948d%3A0x0!2z5p2x5Lqs6YO95paw5a6_5Yy65paw5a6_77yS5LiB55uu77yY55Wq77yR77yV5Y-3IOODkeODvOOCr-ODleODreODs-ODiOaWsOWuvQ!5e0!3m2!1sja!2sjp!4v1" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
   </section>
 
   <!-- Footer -->
@@ -320,9 +456,11 @@
   </footer>
 
   <script>
-    // ── Scroll reveal ──
+    // ── Scroll reveal (toggles on scroll in/out) ──
     const obs = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+      entries.forEach(e => {
+        e.target.classList.toggle('visible', e.isIntersecting);
+      });
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
