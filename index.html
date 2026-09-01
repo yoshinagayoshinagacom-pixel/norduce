@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; overflow-x: hidden; }
   body {
     font-family: "Times New Roman", Times, serif;
     background: #ffffff;
@@ -153,11 +153,36 @@
   .hero-logo {
     max-width: 900px; width: 90%; height: auto;
     opacity: 0;
-    transition: opacity 0.5s ease-out;
   }
   .hero-logo.visible {
     opacity: 1;
   }
+
+  /* Hero floating menu (mobile only) */
+  .hero-menu {
+    list-style: none;
+    display: none; gap: 40px;
+    margin-top: 48px;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  .hero-menu.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .hero-menu a {
+    font-size: 16px; font-weight: 600; letter-spacing: 4px;
+    text-transform: uppercase; color: #999;
+    text-decoration: none; transition: color 0.3s;
+    position: relative;
+  }
+  .hero-menu a::after {
+    content: ''; position: absolute; bottom: -6px; left: 0;
+    width: 0; height: 1px; background: #004aad; transition: width 0.3s;
+  }
+  .hero-menu a:hover { color: #1a1a1a; }
+  .hero-menu a:hover::after { width: 100%; }
 
   /* Scroll indicator */
   .scroll-indicator {
@@ -172,16 +197,30 @@
     transform: translateY(0);
   }
   .scroll-indicator span {
-    font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: #bbb;
+    font-size: 13px; letter-spacing: 6px; text-transform: uppercase; color: #aaa;
+    font-weight: 600;
+  }
+  .scroll-indicator .scroll-arrow-wrap {
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    animation: floatScroll 3s ease-in-out infinite;
   }
   .scroll-arrow {
-    width: 16px; height: 16px;
-    border-right: 1px solid #bbb; border-bottom: 1px solid #bbb;
-    transform: rotate(45deg); animation: bounce 2s infinite;
+    width: 22px; height: 22px;
+    border-right: 2px solid #aaa; border-bottom: 2px solid #aaa;
+    transform: rotate(45deg);
   }
-  @keyframes bounce {
-    0%, 100% { transform: rotate(45deg) translateY(0); }
-    50% { transform: rotate(45deg) translateY(6px); }
+  .scroll-arrow.second {
+    opacity: 0.4;
+  }
+  @keyframes floatScroll {
+    0%, 100% { transform: translateY(0); }
+    30% { transform: translateY(8px); }
+    60% { transform: translateY(-4px); }
+    80% { transform: translateY(3px); }
+  }
+  @keyframes floatBob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
   }
 
   /* ── Mission ── */
@@ -363,8 +402,23 @@
     .section-title { font-size: 22px; }
     .product-card { padding: 28px 20px; }
     .info-table th { width: 80px; font-size: 11px; }
-    .hero { min-height: auto; padding: 100px 0 40px; }
-    .hero-logo { max-width: 100vw; width: 100vw; }
+    .hero { min-height: 100vh; min-height: 100dvh; padding: 80px 0 40px; }
+    .hero-menu {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 0; margin-top: 40px; padding: 0 20px;
+    }
+    .hero-menu li {
+      animation: floatBob 3s ease-in-out infinite;
+    }
+    .hero-menu li:nth-child(1) { animation-delay: 0s; }
+    .hero-menu li:nth-child(2) { animation-delay: 0.4s; }
+    .hero-menu li:nth-child(3) { animation-delay: 0.8s; }
+    .hero-menu li:nth-child(4) { animation-delay: 1.2s; }
+    .hero-menu a { font-size: 15px; letter-spacing: 3px; padding: 14px 0; display: block; }
+    .hero-logo { max-width: 115vw; width: 115vw; margin-left: -7.5vw; }
+    .scroll-indicator span { font-size: 9px; letter-spacing: 3px; }
+    .scroll-arrow { width: 14px; height: 14px; border-width: 1px; }
+    .scroll-indicator { gap: 8px; }
     section { padding: 48px 20px; }
     .nav-icon { width: 40px; height: 40px; }
     .mission-statement { font-size: 22px; }
@@ -409,9 +463,18 @@
   <!-- Hero -->
   <div class="hero" id="hero">
     <video src="logo-animated.mp4" class="hero-logo" id="heroLogo" muted playsinline></video>
+    <ul class="hero-menu" id="heroMenu">
+      <li><a href="#mission">Mission</a></li>
+      <li><a href="#product">Product</a></li>
+      <li><a href="#founder">Founder</a></li>
+      <li><a href="#company">Company</a></li>
+    </ul>
     <div class="scroll-indicator" id="scrollIndicator">
       <span>Scroll</span>
-      <div class="scroll-arrow"></div>
+      <div class="scroll-arrow-wrap">
+        <div class="scroll-arrow"></div>
+        <div class="scroll-arrow second"></div>
+      </div>
     </div>
   </div>
 
@@ -638,15 +701,24 @@
         heroLogo.play();
       }, 300);
 
-      // After video finishes (~2s), reveal mission section and scroll indicator
+      // After video finishes (~2s), reveal menu and scroll indicator
       setTimeout(() => {
-        document.querySelector('.intro-hidden').classList.remove('intro-hidden');
+        document.getElementById('heroMenu').classList.add('visible');
+        // On desktop, reveal mission immediately; on mobile, let scroll reveal it
+        if (window.innerWidth > 600) {
+          document.querySelector('.intro-hidden').classList.remove('intro-hidden');
+        } else {
+          // Remove intro-hidden so IntersectionObserver can take over
+          const el = document.querySelector('.intro-hidden');
+          el.classList.remove('intro-hidden');
+        }
         scrollInd.classList.add('visible');
         introComplete = true;
       }, 2500);
     }
 
     window.addEventListener('load', () => {
+      window.scrollTo(0, 0);
       setTimeout(phase1, 200);
     });
   </script>
