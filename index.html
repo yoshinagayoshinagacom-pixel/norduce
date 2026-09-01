@@ -340,6 +340,7 @@
     transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
   .reveal.visible { opacity: 1; transform: translateY(0); }
+  .intro-hidden { opacity: 0 !important; transform: translateY(60px) !important; }
   .reveal .section-body,
   .reveal .mission-sub,
   .reveal .product-card,
@@ -360,11 +361,11 @@
 
   @media (max-width: 600px) {
     .section-title { font-size: 22px; }
-    section { padding: 80px 20px; }
     .product-card { padding: 28px 20px; }
     .info-table th { width: 80px; font-size: 11px; }
-    .hero { padding: 80px 0 60px; }
+    .hero { min-height: auto; padding: 100px 0 40px; }
     .hero-logo { max-width: 100vw; width: 100vw; }
+    section { padding: 48px 20px; }
     .nav-icon { width: 40px; height: 40px; }
     .mission-statement { font-size: 22px; }
     .founder-layout { flex-direction: column; align-items: center; text-align: center; }
@@ -415,7 +416,7 @@
   </div>
 
   <!-- Mission -->
-  <section class="reveal" id="mission">
+  <section class="reveal intro-hidden" id="mission">
     <div class="section-header"><div class="section-icon"><div class="si-piece si-circle"></div><div class="si-piece si-sq1"></div><div class="si-piece si-sq2"></div><div class="si-piece si-sq3"></div></div><h2 class="section-title jp">ミッション</h2></div>
     <div class="mission-statement">Move Humanity Forward</div>
     <p class="mission-sub jp">
@@ -515,6 +516,25 @@
       const scrolled = window.scrollY > 50;
       document.getElementById('mainNav').classList.toggle('active', scrolled);
     });
+
+    // ── Nav icon scroll rotation with smooth physics ──
+    let targetRotation = 0;
+    let currentRotation = 0;
+    const navIconEl = document.querySelector('.nav-icon');
+
+    window.addEventListener('scroll', () => {
+      if (!introComplete) return;
+      targetRotation = window.scrollY * 0.5;
+    });
+
+    function animateRotation() {
+      currentRotation += (targetRotation - currentRotation) * 0.08;
+      if (navIconEl) {
+        navIconEl.style.transform = 'rotate(' + currentRotation + 'deg)';
+      }
+      requestAnimationFrame(animateRotation);
+    }
+    requestAnimationFrame(animateRotation);
 
     // ══════════════════════════════════════════
     // INTRO SEQUENCE
@@ -618,8 +638,9 @@
         heroLogo.play();
       }, 300);
 
-      // After video finishes (~2s), show scroll indicator
+      // After video finishes (~2s), reveal mission section and scroll indicator
       setTimeout(() => {
+        document.querySelector('.intro-hidden').classList.remove('intro-hidden');
         scrollInd.classList.add('visible');
         introComplete = true;
       }, 2500);
