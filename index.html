@@ -47,7 +47,27 @@
     transition: opacity 0.3s;
   }
   .nav-logo.visible { opacity: 1; pointer-events: auto; }
-  .nav-logo img { height: 42px; width: auto; }
+  .nav-icon {
+    width: 42px; height: 42px; position: relative;
+  }
+  .nav-icon .ni-piece {
+    position: absolute; opacity: 0; transform: scale(0);
+  }
+  .nav-logo.visible .ni-piece {
+    opacity: 1; transform: scale(1);
+    transition: opacity 0.25s ease-out, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .nav-logo.visible .ni-piece:nth-child(1) { transition-delay: 0s; }
+  .nav-logo.visible .ni-piece:nth-child(2) { transition-delay: 0.15s; }
+  .nav-logo.visible .ni-piece:nth-child(3) { transition-delay: 0.3s; }
+  .nav-logo.visible .ni-piece:nth-child(4) { transition-delay: 0.45s; }
+  .ni-circle {
+    width: 52%; height: 51%; border-radius: 50%;
+    background: #f03949; top: 0%; left: 0%;
+  }
+  .ni-sq1 { width: 37%; height: 39%; background: #004aad; top: 13%; left: 62%; }
+  .ni-sq2 { width: 37%; height: 39%; background: #004aad; top: 61%; left: 15%; }
+  .ni-sq3 { width: 37%; height: 39%; background: #004aad; top: 61%; left: 62%; }
   .nav-links { display: flex; gap: 36px; list-style: none; }
   .nav-links a {
     font-size: 11px; font-weight: 600; letter-spacing: 3px;
@@ -86,45 +106,6 @@
     }
   }
 
-  /* ── Animated icon pieces (fixed position) ── */
-  .icon-stage {
-    position: fixed;
-    z-index: 200;
-    pointer-events: none;
-  }
-  .icon-stage .piece {
-    position: absolute;
-    opacity: 0;
-    transform: scale(0);
-    transition: none;
-  }
-  .icon-stage .circle {
-    width: 52%; height: 51%;
-    border-radius: 50%;
-    background: #f03949;
-    top: 0%; left: 0%;
-  }
-  .icon-stage .sq1 {
-    width: 37%; height: 39%;
-    background: #004aad;
-    top: 13%; left: 62%;
-  }
-  .icon-stage .sq2 {
-    width: 37%; height: 39%;
-    background: #004aad;
-    top: 61%; left: 15%;
-  }
-  .icon-stage .sq3 {
-    width: 37%; height: 39%;
-    background: #004aad;
-    top: 61%; left: 62%;
-  }
-  .icon-stage .piece.pop {
-    opacity: 1;
-    transform: scale(1);
-    transition: opacity 0.25s ease-out, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-
   /* ── Hero ── */
   .hero {
     min-height: 100vh;
@@ -134,16 +115,9 @@
     position: relative;
   }
 
-  /* Full company logo — hidden until sequence completes */
+  /* Full company logo — the animated GIF */
   .hero-logo {
-    max-width: 700px; width: 90%; height: auto;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 1s ease-out, transform 1s ease-out;
-  }
-  .hero-logo.visible {
-    opacity: 1;
-    transform: translateY(0);
+    max-width: 900px; width: 90%; height: auto;
   }
 
   /* Scroll indicator */
@@ -217,7 +191,7 @@
   .founder-contact a:hover { border-color: #004aad; }
 
   /* ── Sections ── */
-  section { padding: 140px 24px; max-width: 720px; margin: 0 auto; }
+  section { padding: 80px 24px; max-width: 720px; margin: 0 auto; }
   .section-header {
     display: flex; align-items: center; gap: 16px;
     margin-bottom: 28px;
@@ -323,10 +297,27 @@
 
   /* ── Scroll reveal ── */
   .reveal {
-    opacity: 0; transform: translateY(40px);
-    transition: opacity 0.9s ease, transform 0.9s ease;
+    opacity: 0; transform: translateY(60px);
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
   .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal .section-body,
+  .reveal .mission-sub,
+  .reveal .product-card,
+  .reveal .founder-layout,
+  .reveal .company-layout {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.7s ease 0.3s, transform 0.7s ease 0.3s;
+  }
+  .reveal.visible .section-body,
+  .reveal.visible .mission-sub,
+  .reveal.visible .product-card,
+  .reveal.visible .founder-layout,
+  .reveal.visible .company-layout {
+    opacity: 1; transform: translateY(0);
+  }
+  .reveal.visible .mission-sub:nth-of-type(2) { transition-delay: 0.4s; }
+  .reveal.visible .mission-sub:nth-of-type(3) { transition-delay: 0.5s; }
 
   @media (max-width: 600px) {
     .section-title { font-size: 22px; }
@@ -334,7 +325,7 @@
     .product-card { padding: 28px 20px; }
     .info-table th { width: 80px; font-size: 11px; }
     .hero-logo { max-width: 400px; }
-    .nav-logo img { height: 40px; }
+    .nav-icon { width: 40px; height: 40px; }
     .mission-statement { font-size: 22px; }
     .founder-layout { flex-direction: column; align-items: center; text-align: center; }
     .founder-photo { width: 160px; height: 160px; }
@@ -345,18 +336,15 @@
 </head>
 <body>
 
-  <!-- Animated icon pieces -->
-  <div class="icon-stage" id="iconStage">
-    <div class="piece circle"></div>
-    <div class="piece sq1"></div>
-    <div class="piece sq2"></div>
-    <div class="piece sq3"></div>
-  </div>
-
   <!-- Nav -->
   <nav id="mainNav">
     <a href="#" class="nav-logo" id="navLogo">
-      <img src="logomark.svg" alt="Norduce">
+      <div class="nav-icon">
+        <div class="ni-piece ni-circle"></div>
+        <div class="ni-piece ni-sq1"></div>
+        <div class="ni-piece ni-sq2"></div>
+        <div class="ni-piece ni-sq3"></div>
+      </div>
     </a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#mission">Mission</a></li>
@@ -371,7 +359,7 @@
 
   <!-- Hero -->
   <div class="hero" id="hero">
-    <img src="logo-full.svg" alt="Norduce" class="hero-logo" id="heroLogo">
+    <video src="logo-animated.mp4" class="hero-logo" id="heroLogo" autoplay muted playsinline></video>
     <div class="scroll-indicator" id="scrollIndicator">
       <span>Scroll</span>
       <div class="scroll-arrow"></div>
@@ -482,70 +470,21 @@
 
     // ══════════════════════════════════════════
     // INTRO SEQUENCE
-    // Phase 1: Icon appears center with animation (0-2.5s)
-    // Phase 2: Icon flies to top-left nav corner (2.5-3.8s)
-    // Phase 3: Nav activates, full logo fades in (3.8s+)
+    // GIF plays for ~2s, then nav activates
     // ══════════════════════════════════════════
 
-    const stage = document.getElementById('iconStage');
-    const pieces = stage.querySelectorAll('.piece');
     const navLogo = document.getElementById('navLogo');
-    const heroLogo = document.getElementById('heroLogo');
     const scrollInd = document.getElementById('scrollIndicator');
     const nav = document.getElementById('mainNav');
 
-    const iconSize = 220;
-
-    // Phase 1: position center, pop each piece in one by one (1.5s total)
-    function phase1() {
-      const cx = window.innerWidth / 2 - iconSize / 2;
-      const cy = window.innerHeight / 2 - iconSize / 2;
-      stage.style.width = iconSize + 'px';
-      stage.style.height = iconSize + 'px';
-      stage.style.left = cx + 'px';
-      stage.style.top = cy + 'px';
-
-      // Pop pieces in with stagger: 0ms, 250ms, 500ms, 750ms
-      pieces.forEach((p, i) => {
-        setTimeout(() => p.classList.add('pop'), i * 250);
-      });
-
-      // After all popped in + brief hold, fly to nav
-      setTimeout(phase2, 1500);
-    }
-
-    // Phase 2: smoothly move entire stage to nav corner
-    function phase2() {
-      const navLogoImg = navLogo.querySelector('img');
-      const navRect = navLogo.getBoundingClientRect();
-      const targetH = navLogoImg.offsetHeight || 42;
-      const targetLeft = navRect.left;
-      const targetTop = navRect.top + (navRect.height - targetH) / 2;
-
-      stage.style.transition = 'left 0.8s cubic-bezier(0.4, 0, 0.2, 1), top 0.8s cubic-bezier(0.4, 0, 0.2, 1), width 0.8s cubic-bezier(0.4, 0, 0.2, 1), height 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
-      stage.style.left = targetLeft + 'px';
-      stage.style.top = targetTop + 'px';
-      stage.style.width = targetH + 'px';
-      stage.style.height = targetH + 'px';
-
-      setTimeout(phase3, 900);
-    }
-
-    // Phase 3: swap to nav logo, show full logo
-    function phase3() {
-      stage.style.transition = 'opacity 0.3s';
-      stage.style.opacity = '0';
-      nav.classList.add('active');
-      navLogo.classList.add('visible');
-
-      setTimeout(() => heroLogo.classList.add('visible'), 300);
-      setTimeout(() => scrollInd.classList.add('visible'), 800);
-
-      introComplete = true;
-    }
-
     window.addEventListener('load', () => {
-      setTimeout(phase1, 200);
+      // After GIF finishes (~2s), activate nav
+      setTimeout(() => {
+        nav.classList.add('active');
+        navLogo.classList.add('visible');
+        scrollInd.classList.add('visible');
+        introComplete = true;
+      }, 2200);
     });
   </script>
 </body>
