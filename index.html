@@ -227,6 +227,15 @@
   .mission-statement {
     font-size: 28px; font-weight: 700; letter-spacing: 4px;
     color: #1a1a1a; margin-bottom: 32px;
+    display: inline-block; position: relative;
+  }
+  .mission-statement::after {
+    content: ''; position: absolute; bottom: -4px; left: 0;
+    width: 0; height: 2px; background: #004aad;
+    transition: width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .reveal.visible .mission-statement::after {
+    width: 100%;
   }
   .mission-sub {
     font-size: 15px; color: #555; line-height: 2.4; letter-spacing: 0.5px;
@@ -308,6 +317,17 @@
   .section-title {
     font-size: 32px; font-weight: 700; line-height: 1.7;
     letter-spacing: 2px;
+  }
+  .section-title.underline-anim {
+    position: relative; display: inline-block;
+  }
+  .section-title.underline-anim::after {
+    content: ''; position: absolute; bottom: 4px; left: 0;
+    width: 0; height: 2px; background: #004aad;
+    transition: width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s;
+  }
+  .reveal.visible .section-title.underline-anim::after {
+    width: 100%;
   }
   .section-body {
     font-size: 15px; color: #555; line-height: 2.4; letter-spacing: 0.5px;
@@ -498,7 +518,7 @@
 
   <!-- Why Norduce -->
   <section class="reveal" id="why">
-    <div class="section-header"><h2 class="section-title">Why Norduce?</h2></div>
+    <div class="section-header"><h2 class="section-title underline-anim">Why Norduce?</h2></div>
     <p class="section-body jp">
       Norduceという名前は、Northと、「導く」「引き出す」を意味する-duceから生まれました。
     </p>
@@ -512,7 +532,7 @@
 
   <!-- Slogan -->
   <section class="reveal" id="slogan">
-    <div class="section-header"><h2 class="section-title">Aim High, Think Big</h2></div>
+    <div class="section-header"><h2 class="section-title underline-anim">Aim High, Think Big</h2></div>
     <p class="section-body jp">
       目の前の課題を解くだけで終わらず、その先にある、もっと大きな可能性を考える。高い目標を掲げ、大きな未来を描き、実現するために挑戦し続ける。
     </p>
