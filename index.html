@@ -462,7 +462,7 @@
 
   <!-- Hero -->
   <div class="hero" id="hero">
-    <video src="logo-animated.mp4" class="hero-logo" id="heroLogo" muted playsinline></video>
+    <video src="logo-animated.mp4" class="hero-logo" id="heroLogo" muted playsinline preload="auto"></video>
     <ul class="hero-menu" id="heroMenu">
       <li><a href="#mission">Mission</a></li>
       <li><a href="#product">Product</a></li>
@@ -483,13 +483,16 @@
     <div class="section-header"><div class="section-icon"><div class="si-piece si-circle"></div><div class="si-piece si-sq1"></div><div class="si-piece si-sq2"></div><div class="si-piece si-sq3"></div></div><h2 class="section-title jp">ミッション</h2></div>
     <div class="mission-statement">Move Humanity Forward</div>
     <p class="mission-sub jp">
-      ミッションは「Move Humanity Forward」（「人類を前に進める」）。最新のAI技術を活用してフィットネス、ウェルネス、コーチング、スポーツ、介護など、人々の健康維持・向上を促すサービスを社会に提供します。
+      "人の知恵を、もっと遠くへ。"
     </p>
     <p class="mission-sub jp" style="margin-top: 24px;">
-      社名Norduceは「北へ導く」に由来し、クライアントと並走し、常に北を指すコンパスのように人々をより良い方向へ導く会社でありたいというビジョンを表しています。
+      AIをはじめとする最新のテクノロジーの力で、人間の知恵や専門性を引き出し、より多くの人へ届けられる形へと変えていく。
     </p>
     <p class="mission-sub jp" style="margin-top: 24px;">
-      私たちのスローガンは「Aim High, Think Big」（「高く狙え、大きく考えろ」）。この言葉をチーム全員の共通言語とすることで、Norduceは挑戦とイノベーションを止めない会社であり続けます。
+      フィットネス、ウェルネス、コーチング、スポーツ、介護。人の経験と判断が大きな価値を生む領域から、優れた専門性が一部の人だけのものではなく、必要とするすべての人へ届く社会をつくる。
+    </p>
+    <p class="mission-sub jp" style="margin-top: 24px;">
+      人をテクノロジーに置き換えるのではなく、人だからこそ生み出せる価値を、テクノロジーによってもっと遠くへ届けること。それが、Norduceの使命です。
     </p>
   </section>
 
@@ -627,7 +630,7 @@
         setTimeout(() => p.classList.add('pop'), i * 250);
       });
 
-      setTimeout(phase2, 1500);
+      setTimeout(phase2, 1200);
     }
 
     function phase2() {
@@ -682,24 +685,20 @@
       // Store for phase3 cleanup
       window._flyingPieces = flyingPieces;
 
-      setTimeout(phase3, 1000);
+      setTimeout(phase3, 500);
     }
 
     function phase3() {
-      // Hide the flying pieces, show the nav logo instantly
+      // Hide flying pieces and show video simultaneously
       window._flyingPieces.forEach(p => {
-        p.style.transition = 'opacity 0.3s';
+        p.style.transition = 'opacity 0.2s';
         p.style.opacity = '0';
-        setTimeout(() => p.remove(), 400);
+        setTimeout(() => p.remove(), 300);
       });
       nav.classList.add('active');
       navLogo.classList.add('visible');
-
-      // Show and play the full logo video
-      setTimeout(() => {
-        heroLogo.classList.add('visible');
-        heroLogo.play();
-      }, 300);
+      heroLogo.classList.add('visible');
+      heroLogo.play();
 
       // After video finishes (~2s), reveal menu and scroll indicator
       setTimeout(() => {
