@@ -51,16 +51,11 @@
     width: 42px; height: 42px; position: relative;
   }
   .nav-icon .ni-piece {
-    position: absolute; opacity: 0; transform: scale(0);
+    position: absolute; opacity: 0;
   }
   .nav-logo.visible .ni-piece {
-    opacity: 1; transform: scale(1);
-    transition: opacity 0.25s ease-out, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    opacity: 1;
   }
-  .nav-logo.visible .ni-piece:nth-child(1) { transition-delay: 0s; }
-  .nav-logo.visible .ni-piece:nth-child(2) { transition-delay: 0.15s; }
-  .nav-logo.visible .ni-piece:nth-child(3) { transition-delay: 0.3s; }
-  .nav-logo.visible .ni-piece:nth-child(4) { transition-delay: 0.45s; }
   .ni-circle {
     width: 52%; height: 51%; border-radius: 50%;
     background: #f03949; top: 0%; left: 0%;
@@ -106,6 +101,45 @@
     }
   }
 
+  /* ── Intro icon stage (fixed, center screen) ── */
+  .icon-stage {
+    position: fixed;
+    z-index: 200;
+    pointer-events: none;
+  }
+  .icon-stage .piece {
+    position: absolute;
+    opacity: 0;
+    transform: scale(0);
+    transition: none;
+  }
+  .icon-stage .circle {
+    width: 52%; height: 51%;
+    border-radius: 50%;
+    background: #f03949;
+    top: 0%; left: 0%;
+  }
+  .icon-stage .sq1 {
+    width: 37%; height: 39%;
+    background: #004aad;
+    top: 13%; left: 62%;
+  }
+  .icon-stage .sq2 {
+    width: 37%; height: 39%;
+    background: #004aad;
+    top: 61%; left: 15%;
+  }
+  .icon-stage .sq3 {
+    width: 37%; height: 39%;
+    background: #004aad;
+    top: 61%; left: 62%;
+  }
+  .icon-stage .piece.pop {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.25s ease-out, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
   /* ── Hero ── */
   .hero {
     min-height: 100vh;
@@ -115,9 +149,14 @@
     position: relative;
   }
 
-  /* Full company logo — the animated GIF */
+  /* Full company logo — the animated video */
   .hero-logo {
     max-width: 900px; width: 90%; height: auto;
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+  }
+  .hero-logo.visible {
+    opacity: 1;
   }
 
   /* Scroll indicator */
@@ -324,7 +363,8 @@
     section { padding: 80px 20px; }
     .product-card { padding: 28px 20px; }
     .info-table th { width: 80px; font-size: 11px; }
-    .hero-logo { max-width: 400px; }
+    .hero { padding: 80px 0 60px; }
+    .hero-logo { max-width: 100vw; width: 100vw; }
     .nav-icon { width: 40px; height: 40px; }
     .mission-statement { font-size: 22px; }
     .founder-layout { flex-direction: column; align-items: center; text-align: center; }
@@ -335,6 +375,14 @@
 </style>
 </head>
 <body>
+
+  <!-- Intro icon animation -->
+  <div class="icon-stage" id="iconStage">
+    <div class="piece circle"></div>
+    <div class="piece sq1"></div>
+    <div class="piece sq2"></div>
+    <div class="piece sq3"></div>
+  </div>
 
   <!-- Nav -->
   <nav id="mainNav">
@@ -359,7 +407,7 @@
 
   <!-- Hero -->
   <div class="hero" id="hero">
-    <video src="logo-animated.mp4" class="hero-logo" id="heroLogo" autoplay muted playsinline></video>
+    <video src="logo-animated.mp4" class="hero-logo" id="heroLogo" muted playsinline></video>
     <div class="scroll-indicator" id="scrollIndicator">
       <span>Scroll</span>
       <div class="scroll-arrow"></div>
@@ -470,21 +518,115 @@
 
     // ══════════════════════════════════════════
     // INTRO SEQUENCE
-    // GIF plays for ~2s, then nav activates
+    // Phase 1: Icon pieces pop in at center
+    // Phase 2: Icon flies to top-left nav
+    // Phase 3: Full logo video plays in center
     // ══════════════════════════════════════════
 
+    const stage = document.getElementById('iconStage');
+    const pieces = stage.querySelectorAll('.piece');
     const navLogo = document.getElementById('navLogo');
+    const heroLogo = document.getElementById('heroLogo');
     const scrollInd = document.getElementById('scrollIndicator');
     const nav = document.getElementById('mainNav');
 
-    window.addEventListener('load', () => {
-      // After GIF finishes (~2s), activate nav
+    const iconSize = 220;
+
+    function phase1() {
+      const cx = window.innerWidth / 2 - iconSize / 2;
+      const cy = window.innerHeight / 2 - iconSize / 2;
+      stage.style.width = iconSize + 'px';
+      stage.style.height = iconSize + 'px';
+      stage.style.left = cx + 'px';
+      stage.style.top = cy + 'px';
+
+      pieces.forEach((p, i) => {
+        setTimeout(() => p.classList.add('pop'), i * 250);
+      });
+
+      setTimeout(phase2, 1500);
+    }
+
+    function phase2() {
+      const navIcon = navLogo.querySelector('.nav-icon');
+      const navRect = navLogo.getBoundingClientRect();
+      const targetH = navIcon.offsetHeight || 42;
+      const navX = navRect.left;
+      const navY = navRect.top + (navRect.height - targetH) / 2;
+
+      // Piece positions within the icon (% of icon size)
+      const positions = [
+        { top: 0, left: 0, w: 0.52, h: 0.51 },     // circle
+        { top: 0.13, left: 0.62, w: 0.37, h: 0.39 }, // sq1
+        { top: 0.61, left: 0.15, w: 0.37, h: 0.39 }, // sq2
+        { top: 0.61, left: 0.62, w: 0.37, h: 0.39 }, // sq3
+      ];
+
+      const stageRect = stage.getBoundingClientRect();
+      const delays = [0, 80, 160, 50]; // staggered for バラバラ feel
+
+      const colors = ['#f03949', '#004aad', '#004aad', '#004aad'];
+      const radii = ['50%', '0', '0', '0'];
+      const flyingPieces = [];
+
+      pieces.forEach((p, i) => {
+        const r = p.getBoundingClientRect();
+        const pos = positions[i];
+        const tgtX = navX + pos.left * targetH;
+        const tgtY = navY + pos.top * targetH;
+        const tgtW = pos.w * targetH;
+        const tgtH_ = pos.h * targetH;
+
+        // Create a clone with all styles inlined
+        const clone = document.createElement('div');
+        clone.style.cssText = `position:fixed; z-index:200; top:${r.top}px; left:${r.left}px; width:${r.width}px; height:${r.height}px; background:${colors[i]}; border-radius:${radii[i]}; pointer-events:none;`;
+        document.body.appendChild(clone);
+        flyingPieces.push(clone);
+
+        // Animate to nav position with stagger
+        setTimeout(() => {
+          clone.style.transition = 'left 0.7s cubic-bezier(0.4, 0, 0.2, 1), top 0.7s cubic-bezier(0.4, 0, 0.2, 1), width 0.7s cubic-bezier(0.4, 0, 0.2, 1), height 0.7s cubic-bezier(0.4, 0, 0.2, 1)';
+          clone.style.left = tgtX + 'px';
+          clone.style.top = tgtY + 'px';
+          clone.style.width = tgtW + 'px';
+          clone.style.height = tgtH_ + 'px';
+        }, delays[i]);
+      });
+
+      // Hide the original stage
+      stage.style.display = 'none';
+
+      // Store for phase3 cleanup
+      window._flyingPieces = flyingPieces;
+
+      setTimeout(phase3, 1000);
+    }
+
+    function phase3() {
+      // Hide the flying pieces, show the nav logo instantly
+      window._flyingPieces.forEach(p => {
+        p.style.transition = 'opacity 0.3s';
+        p.style.opacity = '0';
+        setTimeout(() => p.remove(), 400);
+      });
+      nav.classList.add('active');
+      navLogo.classList.add('visible');
+
+      // Show and play the full logo video
       setTimeout(() => {
-        nav.classList.add('active');
-        navLogo.classList.add('visible');
+        heroLogo.classList.add('visible');
+        heroLogo.play();
+      }, 300);
+
+      // After video finishes (~2s), show scroll indicator
+      setTimeout(() => {
         scrollInd.classList.add('visible');
         introComplete = true;
-      }, 2200);
+      }, 2500);
+    }
+
+    window.addEventListener('load', () => {
+      setTimeout(phase1, 200);
     });
   </script>
 </body>
