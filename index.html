@@ -743,7 +743,17 @@
       nav.classList.add('active');
       navLogo.classList.add('visible');
       heroLogo.classList.add('visible');
-      heroLogo.play();
+      var playPromise = heroLogo.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(function() {
+          // Autoplay blocked: show static fallback
+          heroLogo.style.display = 'none';
+          var fallback = document.createElement('img');
+          fallback.src = 'logo-final-frame.png';
+          fallback.className = 'hero-logo visible';
+          heroLogo.parentNode.insertBefore(fallback, heroLogo);
+        });
+      }
 
       // After video finishes (~2s), reveal menu and scroll indicator
       setTimeout(() => {
@@ -763,6 +773,7 @@
 
     window.addEventListener('load', () => {
       window.scrollTo(0, 0);
+      heroLogo.load();
       setTimeout(phase1, 200);
     });
   </script>
