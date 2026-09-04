@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; scroll-padding-top: 80px; overflow-x: hidden; }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; overflow-x: hidden; scroll-restoration: manual; }
   body {
     font-family: "Times New Roman", Times, serif;
     background: #ffffff;
@@ -76,6 +76,14 @@
   }
   .nav-links a:hover { color: #1a1a1a; }
   .nav-links a:hover::after { width: 100%; }
+  .lang-toggle {
+    font-size: 11px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: #888;
+    background: none; border: 1px solid #ccc; border-radius: 4px;
+    padding: 4px 10px; cursor: pointer; transition: color 0.3s, border-color 0.3s;
+    margin-left: 12px;
+  }
+  .lang-toggle:hover { color: #1a1a1a; border-color: #999; }
 
   .menu-toggle {
     display: none; background: none; border: none; cursor: pointer;
@@ -470,11 +478,12 @@
       </div>
     </a>
     <ul class="nav-links" id="navLinks">
-      <li><a href="#mission">Mission</a></li>
-      <li><a href="#product">Product</a></li>
-      <li><a href="#founder">Founder</a></li>
-      <li><a href="#company">Company</a></li>
+      <li><a href="#mission" class="i18n" data-ja="理念" data-en="Mission">理念</a></li>
+      <li><a href="#product" class="i18n" data-ja="事業内容" data-en="Product">事業内容</a></li>
+      <li><a href="#founder" class="i18n" data-ja="代表" data-en="Founder">代表</a></li>
+      <li><a href="#company" class="i18n" data-ja="会社概要" data-en="Company">会社概要</a></li>
     </ul>
+    <button class="lang-toggle" id="langToggle">EN</button>
     <button class="menu-toggle" id="menuToggle" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
@@ -484,10 +493,10 @@
   <div class="hero" id="hero">
     <video src="logo-animated.mp4" class="hero-logo" id="heroLogo" muted playsinline preload="auto"></video>
     <ul class="hero-menu" id="heroMenu">
-      <li><a href="#mission">Mission</a></li>
-      <li><a href="#product">Product</a></li>
-      <li><a href="#founder">Founder</a></li>
-      <li><a href="#company">Company</a></li>
+      <li><a href="#mission" class="i18n" data-ja="理念" data-en="Mission">理念</a></li>
+      <li><a href="#product" class="i18n" data-ja="事業内容" data-en="Product">事業内容</a></li>
+      <li><a href="#founder" class="i18n" data-ja="代表" data-en="Founder">代表</a></li>
+      <li><a href="#company" class="i18n" data-ja="会社概要" data-en="Company">会社概要</a></li>
     </ul>
     <div class="scroll-indicator" id="scrollIndicator">
       <span>Scroll</span>
@@ -500,18 +509,18 @@
 
   <!-- Mission -->
   <section class="reveal intro-hidden" id="mission">
-    <div class="section-header"><div class="section-icon"><div class="si-piece si-circle"></div><div class="si-piece si-sq1"></div><div class="si-piece si-sq2"></div><div class="si-piece si-sq3"></div></div><h2 class="section-title jp">ミッション</h2></div>
+    <div class="section-header"><div class="section-icon"><div class="si-piece si-circle"></div><div class="si-piece si-sq1"></div><div class="si-piece si-sq2"></div><div class="si-piece si-sq3"></div></div><h2 class="section-title jp i18n" data-ja="理念" data-en="Mission">理念</h2></div>
     <div class="mission-statement">Move Humanity Forward</div>
-    <p class="mission-sub jp">
+    <p class="mission-sub jp i18n" data-ja="&quot;人間の知恵を、もっと遠くへ。&quot;" data-en="&quot;Carrying human wisdom further.&quot;">
       "人間の知恵を、もっと遠くへ。"
     </p>
-    <p class="mission-sub jp" style="margin-top: 24px;">
+    <p class="mission-sub jp i18n" style="margin-top: 24px;" data-ja="AIをはじめとする最新のテクノロジーの力で、人間の知恵や専門性を引き出し、より多くの人へ届けられる形へと変えていく。" data-en="We harness AI and cutting-edge technology to unlock human wisdom and expertise, transforming them into forms that can reach more people.">
       AIをはじめとする最新のテクノロジーの力で、人間の知恵や専門性を引き出し、より多くの人へ届けられる形へと変えていく。
     </p>
-    <p class="mission-sub jp" style="margin-top: 24px;">
+    <p class="mission-sub jp i18n" style="margin-top: 24px;" data-ja="フィットネス、ウェルネス、コーチング、スポーツ、介護。人の経験と判断が大きな価値を生む領域から、優れた専門性が一部の人だけのものではなく、必要とするすべての人へ届く社会をつくる。" data-en="Fitness, wellness, coaching, sports, eldercare. Starting from fields where human experience and judgment create immense value, we are building a society where outstanding expertise reaches everyone who needs it, not just the privileged few.">
       フィットネス、ウェルネス、コーチング、スポーツ、介護。人の経験と判断が大きな価値を生む領域から、優れた専門性が一部の人だけのものではなく、必要とするすべての人へ届く社会をつくる。
     </p>
-    <p class="mission-sub jp" style="margin-top: 24px;">
+    <p class="mission-sub jp i18n" style="margin-top: 24px;" data-ja="人をテクノロジーに置き換えるのではなく、人だからこそ生み出せる価値を、テクノロジーによってもっと遠くへ届けること。それが、Norduceの使命であり、Mission Statementです。" data-en="Not replacing people with technology, but using technology to carry the value that only people can create even further. That is Norduce's purpose and mission statement.">
       人をテクノロジーに置き換えるのではなく、人だからこそ生み出せる価値を、テクノロジーによってもっと遠くへ届けること。それが、Norduceの使命であり、Mission Statementです。
     </p>
   </section>
@@ -519,13 +528,13 @@
   <!-- Why Norduce -->
   <section class="reveal" id="why">
     <div class="section-header"><h2 class="section-title underline-anim">Why Norduce?</h2></div>
-    <p class="section-body jp">
+    <p class="section-body jp i18n" data-ja="Norduceという名前は、Northと、「導く」「引き出す」を意味する-duceから生まれました。" data-en="The name Norduce was born from North and -duce, meaning &quot;to lead&quot; and &quot;to draw out.&quot;">
       Norduceという名前は、Northと、「導く」「引き出す」を意味する-duceから生まれました。
     </p>
-    <p class="section-body jp" style="margin-top: 24px;">
+    <p class="section-body jp i18n" style="margin-top: 24px;" data-ja="Northは、私たちにとって進むべき未来を示す北極星です。目の前の課題に向き合いながらも、その先にある未来を見失わない。クライアントやパートナーと同じ方向を向き、並走しながら、人と社会をより良い方向へ導く存在でありたい。" data-en="North represents our guiding star, pointing toward the future we strive for. We face the challenges before us without losing sight of what lies ahead. We aim to walk alongside our clients and partners, guiding people and society toward a better direction.">
       Northは、私たちにとって進むべき未来を示す北極星です。目の前の課題に向き合いながらも、その先にある未来を見失わない。クライアントやパートナーと同じ方向を向き、並走しながら、人と社会をより良い方向へ導く存在でありたい。
     </p>
-    <p class="section-body jp" style="margin-top: 24px;">
+    <p class="section-body jp i18n" style="margin-top: 24px;" data-ja="そんな想いを、Norduceという名前に込めています。" data-en="That is the vision we have embedded in the name Norduce.">
       そんな想いを、Norduceという名前に込めています。
     </p>
   </section>
@@ -533,23 +542,23 @@
   <!-- Slogan -->
   <section class="reveal" id="slogan">
     <div class="section-header"><h2 class="section-title underline-anim">Aim High, Think Big</h2></div>
-    <p class="section-body jp">
+    <p class="section-body jp i18n" data-ja="目の前の課題を解くだけで終わらず、その先にある、もっと大きな可能性を考える。高い目標を掲げ、大きな未来を描き、実現するために挑戦し続ける。" data-en="We don't stop at solving the problem in front of us. We think about the greater possibilities beyond. We set ambitious goals, envision a bold future, and keep pushing to make it real.">
       目の前の課題を解くだけで終わらず、その先にある、もっと大きな可能性を考える。高い目標を掲げ、大きな未来を描き、実現するために挑戦し続ける。
     </p>
-    <p class="section-body jp" style="margin-top: 24px;">
+    <p class="section-body jp i18n" style="margin-top: 24px;" data-ja="私たちのスローガンは「Aim High, Think Big」、「高く狙え、大きく考えろ」です。" data-en="Our slogan is &quot;Aim High, Think Big.&quot;">
       私たちのスローガンは「Aim High, Think Big」、「高く狙え、大きく考えろ」です。
     </p>
-    <p class="section-body jp" style="margin-top: 24px;">
+    <p class="section-body jp i18n" style="margin-top: 24px;" data-ja="この言葉をチーム全員の共通言語とすることで、Norduceは挑戦とイノベーションを止めない会社であり続けます。" data-en="By making these words our shared language, Norduce remains a company that never stops challenging and innovating.">
       この言葉をチーム全員の共通言語とすることで、Norduceは挑戦とイノベーションを止めない会社であり続けます。
     </p>
   </section>
 
   <!-- Product -->
   <section class="reveal" id="product">
-    <div class="section-header"><div class="section-icon"><div class="si-piece si-circle"></div><div class="si-piece si-sq1"></div><div class="si-piece si-sq2"></div><div class="si-piece si-sq3"></div></div><h2 class="section-title">Product</h2></div>
+    <div class="section-header"><div class="section-icon"><div class="si-piece si-circle"></div><div class="si-piece si-sq1"></div><div class="si-piece si-sq2"></div><div class="si-piece si-sq3"></div></div><h2 class="section-title jp i18n" data-ja="事業内容" data-en="Product">事業内容</h2></div>
     <div class="product-card">
       <div class="product-name">TreMimic</div>
-      <p class="product-desc jp">
+      <p class="product-desc jp i18n" data-ja="パーソナルトレーナーに特化したAI指導アシスタント。食事報告への返信からトレーニング記録の管理まで、クライアント対応を自動化し、顧客満足度の向上と業務時間の削減を実現します。" data-en="An AI coaching assistant built for personal trainers. From responding to meal reports to managing training records, it automates client communication to boost satisfaction and save time.">
         パーソナルトレーナーに特化したAI指導アシスタント。食事報告への返信からトレーニング記録の管理まで、クライアント対応を自動化し、顧客満足度の向上と業務時間の削減を実現します。
       </p>
       <a href="https://tremimic.com" class="product-link" target="_blank">tremimic.com</a>
@@ -558,16 +567,16 @@
 
   <!-- Founder -->
   <section class="reveal" id="founder">
-    <div class="section-header"><div class="section-icon"><div class="si-piece si-circle"></div><div class="si-piece si-sq1"></div><div class="si-piece si-sq2"></div><div class="si-piece si-sq3"></div></div><h2 class="section-title jp">代表</h2></div>
+    <div class="section-header"><div class="section-icon"><div class="si-piece si-circle"></div><div class="si-piece si-sq1"></div><div class="si-piece si-sq2"></div><div class="si-piece si-sq3"></div></div><h2 class="section-title jp i18n" data-ja="代表" data-en="Founder">代表</h2></div>
     <div class="founder-layout">
       <div class="founder-photo">
         <img src="images/founder.jpg" alt="橋本善永">
       </div>
       <div>
-        <div class="founder-name jp">橋本 善永</div>
-        <div class="founder-role">Norduce株式会社 代表取締役社長 / CEO</div>
-        <p class="founder-bio jp">国際基督教大学（ICU）教養学部4年。在学中、レスリング部をゼロから立ち上げ、3年間主将としてチームを率いる。東日本学生レスリング選手権70kg級で準優勝するなど、競技者としても実績を残す。また学業では投資研究会に所属し、幼少期から15年を海外で過ごした日英バイリンガルの強みを活かし、国内外のAI関連事業の研究に取り組む。</p>
-        <p class="founder-bio jp">自身も指導の現場に立つなかで、「事業を伸ばすほど、一人ひとりに向き合う時間が削られていく」という指導者共通の課題に直面。ゼロからの組織づくりと競技・指導の経験をもとに、優れた指導者の価値を個人の制約から解放するべく、Norduce株式会社を創業。</p>
+        <div class="founder-name jp i18n" data-ja="橋本 善永" data-en="Yoshinaga Hashimoto">橋本 善永</div>
+        <div class="founder-role i18n" data-ja="Norduce株式会社 代表取締役社長 / CEO" data-en="Norduce Inc. Founder &amp; CEO">Norduce株式会社 代表取締役社長 / CEO</div>
+        <p class="founder-bio jp i18n" data-ja="国際基督教大学（ICU）教養学部4年。在学中、レスリング部をゼロから立ち上げ、3年間主将としてチームを率いる。東日本学生レスリング選手権70kg級で準優勝するなど、競技者としても実績を残す。また学業では投資研究会に所属し、幼少期から15年を海外で過ごした日英バイリンガルの強みを活かし、国内外のAI関連事業の研究に取り組む。" data-en="Senior at International Christian University (ICU), College of Liberal Arts. Founded the university wrestling team from scratch and captained it for three years. Placed runner-up in the 70kg class at the East Japan Collegiate Wrestling Championship. A bilingual (Japanese/English) who spent 15 years abroad from childhood, he is a member of the Investment Research Society and conducts research on AI-related businesses both domestically and internationally.">国際基督教大学（ICU）教養学部4年。在学中、レスリング部をゼロから立ち上げ、3年間主将としてチームを率いる。東日本学生レスリング選手権70kg級で準優勝するなど、競技者としても実績を残す。また学業では投資研究会に所属し、幼少期から15年を海外で過ごした日英バイリンガルの強みを活かし、国内外のAI関連事業の研究に取り組む。</p>
+        <p class="founder-bio jp i18n" data-ja="自身も指導の現場に立つなかで、「事業を伸ばすほど、一人ひとりに向き合う時間が削られていく」という指導者共通の課題に直面。ゼロからの組織づくりと競技・指導の経験をもとに、優れた指導者の価値を個人の制約から解放するべく、Norduce株式会社を創業。" data-en="Through his own experience in coaching, he encountered a challenge common to all instructors: the more the business grows, the less time there is to dedicate to each individual. Drawing on his experience building organizations from zero and his background in athletics and coaching, he founded Norduce Inc. to free the value of great instructors from the constraints of the individual.">自身も指導の現場に立つなかで、「事業を伸ばすほど、一人ひとりに向き合う時間が削られていく」という指導者共通の課題に直面。ゼロからの組織づくりと競技・指導の経験をもとに、優れた指導者の価値を個人の制約から解放するべく、Norduce株式会社を創業。</p>
         <div class="founder-contact">
           <a href="mailto:yoshinaga.hashimoto@norduce.co.jp">yoshinaga.hashimoto@norduce.co.jp</a>
           <a href="tel:08044776326">080-4477-6326</a>
@@ -578,15 +587,15 @@
 
   <!-- Company -->
   <section class="reveal" id="company" style="max-width:900px;">
-    <div class="section-header"><div class="section-icon"><div class="si-piece si-circle"></div><div class="si-piece si-sq1"></div><div class="si-piece si-sq2"></div><div class="si-piece si-sq3"></div></div><h2 class="section-title jp">会社概要</h2></div>
+    <div class="section-header"><div class="section-icon"><div class="si-piece si-circle"></div><div class="si-piece si-sq1"></div><div class="si-piece si-sq2"></div><div class="si-piece si-sq3"></div></div><h2 class="section-title jp i18n" data-ja="会社概要" data-en="Company">会社概要</h2></div>
     <div class="company-layout">
       <table class="info-table">
-        <tr><th>会社名</th><td class="jp">Norduce株式会社</td></tr>
-        <tr><th>設立</th><td class="jp">2026年8月3日</td></tr>
-        <tr><th>代表者</th><td class="jp">橋本 善永</td></tr>
-        <tr><th>最高執行責任者</th><td class="jp">宮本 怜旺</td></tr>
-        <tr><th>所在地</th><td class="jp">〒160-0022<br>東京都新宿区新宿2丁目8番15号<br>パークフロント新宿 202号室</td></tr>
-        <tr><th>事業内容</th><td class="jp">AIソフトウェアの企画・開発・運営</td></tr>
+        <tr><th class="i18n" data-ja="会社名" data-en="Company">会社名</th><td class="jp i18n" data-ja="Norduce株式会社" data-en="Norduce Inc.">Norduce株式会社</td></tr>
+        <tr><th class="i18n" data-ja="設立" data-en="Founded">設立</th><td class="jp i18n" data-ja="2026年8月3日" data-en="August 3, 2026">2026年8月3日</td></tr>
+        <tr><th class="i18n" data-ja="代表者" data-en="CEO">代表者</th><td class="jp i18n" data-ja="橋本 善永" data-en="Yoshinaga Hashimoto">橋本 善永</td></tr>
+        <tr><th class="i18n" data-ja="最高執行責任者" data-en="COO">最高執行責任者</th><td class="jp i18n" data-ja="宮本 怜旺" data-en="Reo Miyamoto">宮本 怜旺</td></tr>
+        <tr><th class="i18n" data-ja="所在地" data-en="Address">所在地</th><td class="jp i18n" data-ja="〒160-0022<br>東京都新宿区新宿2丁目8番15号<br>パークフロント新宿 202号室" data-en="Park Front Shinjuku #202<br>2-8-15 Shinjuku, Shinjuku-ku<br>Tokyo 160-0022, Japan">〒160-0022<br>東京都新宿区新宿2丁目8番15号<br>パークフロント新宿 202号室</td></tr>
+        <tr><th class="i18n" data-ja="事業内容" data-en="Business">事業内容</th><td class="jp i18n" data-ja="AIソフトウェアの企画・開発・運営" data-en="Planning, development, and operation of AI software">AIソフトウェアの企画・開発・運営</td></tr>
       </table>
       <div class="company-map">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.5!2d139.7095!3d35.6905!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188cd5c3de948d%3A0x0!2z5p2x5Lqs6YO95paw5a6_5Yy65paw5a6_77yS5LiB55uu77yY55Wq77yR77yV5Y-3IOODkeODvOOCr-ODleODreODs-ODiOaWsOWuvQ!5e0!3m2!1sja!2sjp!4v1" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -771,10 +780,25 @@
       }, 2500);
     }
 
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+
     window.addEventListener('load', () => {
       window.scrollTo(0, 0);
       heroLogo.load();
       setTimeout(phase1, 200);
+    });
+
+    // ── Language toggle ──
+    let currentLang = 'ja';
+    document.getElementById('langToggle').addEventListener('click', () => {
+      currentLang = currentLang === 'ja' ? 'en' : 'ja';
+      document.getElementById('langToggle').textContent = currentLang === 'ja' ? 'EN' : 'JP';
+      document.documentElement.lang = currentLang === 'ja' ? 'ja' : 'en';
+      document.querySelectorAll('.i18n').forEach(el => {
+        const text = el.getAttribute('data-' + currentLang);
+        if (text) el.innerHTML = text;
+      });
     });
   </script>
 </body>
