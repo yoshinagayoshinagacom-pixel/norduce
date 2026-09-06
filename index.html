@@ -467,6 +467,21 @@
     .company-layout { flex-direction: column; }
     .company-map { width: 100%; }
   }
+
+  /* Collapsible sections */
+  .collapsible { cursor: pointer; user-select: none; }
+  .collapse-icon {
+    margin-left: auto; font-size: 20px; font-weight: 300;
+    color: #999; transition: transform 0.3s;
+  }
+  .collapsible.open .collapse-icon { transform: rotate(45deg); }
+  .section-content {
+    overflow: hidden; transition: max-height 0.4s ease, opacity 0.3s ease;
+    max-height: 1000px; opacity: 1;
+  }
+  .section-content.collapsed {
+    max-height: 0; opacity: 0;
+  }
 </style>
 </head>
 <body>
@@ -522,19 +537,19 @@
   <!-- Mission -->
   <section class="reveal intro-hidden" id="mission">
     <div class="section-header"><div class="section-icon"><div class="si-piece si-circle"></div><div class="si-piece si-sq1"></div><div class="si-piece si-sq2"></div><div class="si-piece si-sq3"></div></div><h2 class="section-title jp i18n" data-ja="理念" data-en="Mission">理念</h2></div>
-    <div class="mission-statement">Move Humanity Forward</div>
-    <p class="mission-sub jp i18n" data-ja="&quot;人間の知恵を、もっと遠くへ。&quot;" data-en="">
-      "人間の知恵を、もっと遠くへ。"
-    </p>
-    <p class="mission-sub jp i18n" style="margin-top: 24px;" data-ja="AIをはじめとする最新のテクノロジーの力で、人間の知恵や専門性を引き出し、より多くの人へ届けられる形へと変えていく。" data-en="We use AI and cutting-edge technology to unlock human wisdom and expertise, freeing it from its reliance on the individual so that it can reach a larger population.">
-      AIをはじめとする最新のテクノロジーの力で、人間の知恵や専門性を引き出し、より多くの人へ届けられる形へと変えていく。
-    </p>
-    <p class="mission-sub jp i18n" style="margin-top: 24px;" data-ja="フィットネス、ウェルネス、コーチング、スポーツ、介護。人の経験と判断が大きな価値を生む領域から、優れた専門性が一部の人だけのものではなく、必要とするすべての人へ届く社会をつくる。" data-en="We have our sights set on fitness, wellness, coaching, sports and eldercare. Starting from fields where human experience and judgment create immense value, we are building a society where outstanding expertise reaches everyone who needs it, not just the privileged few.">
-      フィットネス、ウェルネス、コーチング、スポーツ、介護。人の経験と判断が大きな価値を生む領域から、優れた専門性が一部の人だけのものではなく、必要とするすべての人へ届く社会をつくる。
-    </p>
-    <p class="mission-sub jp i18n" style="margin-top: 24px;" data-ja="人をテクノロジーに置き換えるのではなく、人だからこそ生み出せる価値を、テクノロジーによってもっと遠くへ届けること。それが、Norduceの使命であり、Mission Statementです。" data-en="We do not aim to replace people with technology. Rather, we use technology to carry the value that only people can create even further. That is Norduce's purpose and mission.">
-      人をテクノロジーに置き換えるのではなく、人だからこそ生み出せる価値を、テクノロジーによってもっと遠くへ届けること。それが、Norduceの使命であり、Mission Statementです。
-    </p>
+    <div class="mission-statement">Maximize Human Potential,<br>Move Humanity Forward</div>
+      <p class="mission-sub jp i18n" data-ja="&quot;人間の知恵を、もっと遠くへ。&quot;" data-en="">
+        "人間の知恵を、もっと遠くへ。"
+      </p>
+      <p class="mission-sub jp i18n" style="margin-top: 24px;" data-ja="AIをはじめとする最新のテクノロジーの力で、人間の知恵や専門性を引き出し、より多くの人へ届けられる形へと変えていく。" data-en="We use AI and cutting-edge technology to unlock human wisdom and expertise, freeing it from its reliance on the individual so that it can reach a larger population.">
+        AIをはじめとする最新のテクノロジーの力で、人間の知恵や専門性を引き出し、より多くの人へ届けられる形へと変えていく。
+      </p>
+      <p class="mission-sub jp i18n" style="margin-top: 24px;" data-ja="フィットネス、ウェルネス、コーチング、スポーツ、介護。人の経験と判断が大きな価値を生む領域から、優れた専門性が一部の人だけのものではなく、必要とするすべての人へ届く社会をつくる。" data-en="We have our sights set on fitness, wellness, coaching, sports and eldercare. Starting from fields where human experience and judgment create immense value, we are building a society where outstanding expertise reaches everyone who needs it, not just the privileged few.">
+        フィットネス、ウェルネス、コーチング、スポーツ、介護。人の経験と判断が大きな価値を生む領域から、優れた専門性が一部の人だけのものではなく、必要とするすべての人へ届く社会をつくる。
+      </p>
+      <p class="mission-sub jp i18n" style="margin-top: 24px;" data-ja="人をテクノロジーに置き換えるのではなく、人だからこそ生み出せる価値を、テクノロジーによってもっと遠くへ届けること。それが、Norduceの使命であり、Mission Statementです。" data-en="We do not aim to replace people with technology. Rather, we use technology to carry the value that only people can create even further. That is Norduce's purpose and mission.">
+        人をテクノロジーに置き換えるのではなく、人だからこそ生み出せる価値を、テクノロジーによってもっと遠くへ届けること。それが、Norduceの使命であり、Mission Statementです。
+      </p>
   </section>
 
   <!-- Why Norduce -->
@@ -625,6 +640,13 @@
   </footer>
 
   <script>
+    // ── Collapsible sections ──
+    function toggleSection(header) {
+      header.classList.toggle('open');
+      const content = header.nextElementSibling;
+      content.classList.toggle('collapsed');
+    }
+
     // ── Scroll reveal (toggles on scroll in/out) ──
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(e => {
