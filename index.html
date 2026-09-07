@@ -368,9 +368,10 @@
   }
   .product-division {
     font-size: 26px; font-weight: 700; letter-spacing: 2px;
-    color: #1a1a1a; margin-bottom: 12px; line-height: 1.7;
+    color: #1a1a1a; margin-bottom: 0; line-height: 1.7;
     margin-top: 48px;
     position: relative; display: inline-block;
+    cursor: pointer; user-select: none;
   }
   .product-division::after {
     content: ''; position: absolute; bottom: 4px; left: 0;
@@ -378,7 +379,27 @@
     transition: width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s;
   }
   .reveal.visible .product-division::after { width: 100%; }
+  .product-division::before {
+    content: ''; position: absolute; bottom: 4px; left: 0;
+    width: 0; height: 2px; background: #c0392b; z-index: 1;
+    transition: width 1.5s ease;
+  }
+  .product-division:hover::before { width: 100%; }
   .product-division:first-child { margin-top: 0; }
+  .product-division .div-toggle {
+    font-size: 16px; font-weight: 300; color: #999;
+    margin-left: 12px; display: inline-block;
+    transition: transform 0.3s;
+  }
+  .product-division.open .div-toggle { transform: rotate(45deg); }
+  .product-card-wrap {
+    overflow: hidden; max-height: 0; opacity: 0;
+    transition: max-height 0.4s ease, opacity 0.3s ease, margin 0.3s ease;
+    margin-top: 0;
+  }
+  .product-card-wrap.open {
+    max-height: 500px; opacity: 1; margin-top: 12px;
+  }
   .product-name {
     font-size: 16px; font-weight: 600; margin-bottom: 8px;
     color: #004aad; letter-spacing: 1px;
@@ -610,30 +631,36 @@
     <div class="section-header"><div class="section-icon"><div class="si-piece si-circle"></div><div class="si-piece si-sq1"></div><div class="si-piece si-sq2"></div><div class="si-piece si-sq3"></div></div><h2 class="section-title jp i18n" data-ja="事業内容" data-en="Services">事業内容</h2></div>
     <div class="product-grid">
       <!-- BtoB SaaS -->
-      <div class="product-division i18n" data-ja="BtoB SaaS開発事業" data-en="BtoB SaaS Development">BtoB SaaS開発事業</div>
-      <div class="product-card">
-        <div class="product-name">TreMimic</div>
-        <p class="product-desc jp i18n" data-ja="パーソナルトレーナーに特化したAI指導アシスタント。食事報告への返信からトレーニング記録の管理まで、クライアント対応を自動化し、顧客満足度の向上と業務時間の削減を実現します。" data-en="An AI coaching assistant built for personal trainers. From responding to meal reports to managing training records, it automates client communication to boost satisfaction and save time.">
-          パーソナルトレーナーに特化したAI指導アシスタント。食事報告への返信からトレーニング記録の管理まで、クライアント対応を自動化し、顧客満足度の向上と業務時間の削減を実現します。
-        </p>
-        <a href="https://tremimic.com" class="product-link" target="_blank">tremimic.com</a>
+      <div class="product-division i18n" onclick="toggleDivision(this)" data-ja="BtoB SaaS開発事業" data-en="BtoB SaaS Development">BtoB SaaS開発事業<span class="div-toggle">+</span></div>
+      <div class="product-card-wrap">
+        <div class="product-card">
+          <div class="product-name">TreMimic</div>
+          <p class="product-desc jp i18n" data-ja="パーソナルトレーナーに特化したAI指導アシスタント。食事報告への返信からトレーニング記録の管理まで、クライアント対応を自動化し、顧客満足度の向上と業務時間の削減を実現します。" data-en="An AI coaching assistant built for personal trainers. From responding to meal reports to managing training records, it automates client communication to boost satisfaction and save time.">
+            パーソナルトレーナーに特化したAI指導アシスタント。食事報告への返信からトレーニング記録の管理まで、クライアント対応を自動化し、顧客満足度の向上と業務時間の削減を実現します。
+          </p>
+          <a href="https://tremimic.com" class="product-link" target="_blank">tremimic.com</a>
+        </div>
       </div>
       <!-- BtoC App -->
-      <div class="product-division i18n" data-ja="BtoC アプリ開発事業" data-en="BtoC App Development">BtoC アプリ開発事業</div>
-      <div class="product-card">
-        <div class="product-name i18n" data-ja="Coming Soon" data-en="Coming Soon">Coming Soon</div>
-        <p class="product-desc jp i18n" data-ja="一般消費者向けのアプリケーション開発事業。AI技術を活用し、日常生活をより豊かにするプロダクトを企画・開発しています。" data-en="Consumer-facing application development. We plan and build products that enrich daily life through AI technology.">
-          一般消費者向けのアプリケーション開発事業。AI技術を活用し、日常生活をより豊かにするプロダクトを企画・開発しています。
-        </p>
-        <span class="product-tag i18n" data-ja="準備中" data-en="In Preparation">準備中</span>
+      <div class="product-division i18n" onclick="toggleDivision(this)" data-ja="BtoC アプリ開発事業" data-en="BtoC App Development">BtoC アプリ開発事業<span class="div-toggle">+</span></div>
+      <div class="product-card-wrap">
+        <div class="product-card">
+          <div class="product-name i18n" data-ja="Coming Soon" data-en="Coming Soon">Coming Soon</div>
+          <p class="product-desc jp i18n" data-ja="一般消費者向けのアプリケーション開発事業。AI技術を活用し、日常生活をより豊かにするプロダクトを企画・開発しています。" data-en="Consumer-facing application development. We plan and build products that enrich daily life through AI technology.">
+            一般消費者向けのアプリケーション開発事業。AI技術を活用し、日常生活をより豊かにするプロダクトを企画・開発しています。
+          </p>
+          <span class="product-tag i18n" data-ja="準備中" data-en="In Preparation">準備中</span>
+        </div>
       </div>
       <!-- Think Tank -->
-      <div class="product-division i18n" data-ja="シンクタンク事業" data-en="Think Tank">シンクタンク事業</div>
-      <div class="product-card">
-        <div class="product-name i18n" data-ja="AI活用リサーチ" data-en="AI Utilization Research">AI活用リサーチ</div>
-        <p class="product-desc jp i18n" data-ja="「ビジネスにおけるAI活用を最大化する」をテーマにリサーチを推進。企業のAI導入戦略から実装まで、実践的な知見を提供します。" data-en="Under the theme of maximizing AI utilization in business, we drive forward research. We provide practical insights from AI adoption strategy to implementation.">
-          「ビジネスにおけるAI活用を最大化する」をテーマにリサーチを推進。企業のAI導入戦略から実装まで、実践的な知見を提供します。
-        </p>
+      <div class="product-division i18n" onclick="toggleDivision(this)" data-ja="シンクタンク事業" data-en="Think Tank">シンクタンク事業<span class="div-toggle">+</span></div>
+      <div class="product-card-wrap">
+        <div class="product-card">
+          <div class="product-name i18n" data-ja="AI活用リサーチ" data-en="AI Utilization Research">AI活用リサーチ</div>
+          <p class="product-desc jp i18n" data-ja="「ビジネスにおけるAI活用を最大化する」をテーマにリサーチを推進。企業のAI導入戦略から実装まで、実践的な知見を提供します。" data-en="Under the theme of maximizing AI utilization in business, we drive forward research. We provide practical insights from AI adoption strategy to implementation.">
+            「ビジネスにおけるAI活用を最大化する」をテーマにリサーチを推進。企業のAI導入戦略から実装まで、実践的な知見を提供します。
+          </p>
+        </div>
       </div>
     </div>
   </section>
@@ -691,6 +718,10 @@
       header.classList.toggle('open');
       const content = header.nextElementSibling;
       content.classList.toggle('collapsed');
+    }
+    function toggleDivision(el) {
+      el.classList.toggle('open');
+      el.nextElementSibling.classList.toggle('open');
     }
 
     // ── Scroll reveal (toggles on scroll in/out) ──
