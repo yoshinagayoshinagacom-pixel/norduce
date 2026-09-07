@@ -233,7 +233,7 @@
 
   /* ── Mission ── */
   .mission-statement {
-    font-size: 24px; font-weight: 700; letter-spacing: 3px;
+    font-size: 32px; font-weight: 700; letter-spacing: 4px;
     color: #1a1a1a; margin-bottom: 32px;
     display: inline-block; position: relative;
   }
@@ -354,8 +354,11 @@
   }
 
   /* ── Product card ── */
+  .product-grid {
+    margin-top: 48px;
+  }
   .product-card {
-    margin-top: 48px; padding: 48px;
+    padding: 40px;
     border: 1px solid #e8eaef; border-radius: 16px;
     transition: box-shadow 0.4s, transform 0.4s;
   }
@@ -363,9 +366,22 @@
     box-shadow: 0 12px 48px rgba(0, 74, 173, 0.08);
     transform: translateY(-4px);
   }
+  .product-division {
+    font-size: 26px; font-weight: 700; letter-spacing: 2px;
+    color: #1a1a1a; margin-bottom: 12px; line-height: 1.7;
+    margin-top: 48px;
+    position: relative; display: inline-block;
+  }
+  .product-division::after {
+    content: ''; position: absolute; bottom: 4px; left: 0;
+    width: 0; height: 2px; background: #004aad;
+    transition: width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s;
+  }
+  .reveal.visible .product-division::after { width: 100%; }
+  .product-division:first-child { margin-top: 0; }
   .product-name {
-    font-size: 20px; font-weight: 700; margin-bottom: 12px;
-    color: #004aad; letter-spacing: 2px;
+    font-size: 16px; font-weight: 600; margin-bottom: 8px;
+    color: #004aad; letter-spacing: 1px;
   }
   .product-desc { font-size: 14px; color: #666; line-height: 2.2; }
   .product-link {
@@ -376,6 +392,12 @@
   }
   .product-link:hover { gap: 14px; }
   .product-link::after { content: '\2192'; }
+  .product-tag {
+    display: inline-block; margin-top: 16px; padding: 4px 12px;
+    font-size: 11px; font-weight: 600; letter-spacing: 1px;
+    color: #004aad; background: rgba(0, 74, 173, 0.06);
+    border-radius: 20px;
+  }
 
   /* ── Company layout ── */
   .company-layout {
@@ -435,12 +457,15 @@
   .reveal.visible .company-layout {
     opacity: 1; transform: translateY(0);
   }
+  .reveal.visible .product-card:nth-child(2) { transition-delay: 0.45s; }
+  .reveal.visible .product-card:nth-child(3) { transition-delay: 0.6s; }
   .reveal.visible .mission-sub:nth-of-type(2) { transition-delay: 0.4s; }
   .reveal.visible .mission-sub:nth-of-type(3) { transition-delay: 0.5s; }
 
   @media (max-width: 600px) {
     .section-title { font-size: 22px; }
     .product-card { padding: 28px 20px; }
+    .product-grid { gap: 20px; }
     .info-table th { width: 80px; font-size: 11px; }
     .hero { min-height: 100vh; min-height: 100dvh; padding: 80px 0 40px; }
     .hero-menu {
@@ -583,12 +608,33 @@
   <!-- Product -->
   <section class="reveal" id="product">
     <div class="section-header"><div class="section-icon"><div class="si-piece si-circle"></div><div class="si-piece si-sq1"></div><div class="si-piece si-sq2"></div><div class="si-piece si-sq3"></div></div><h2 class="section-title jp i18n" data-ja="事業内容" data-en="Services">事業内容</h2></div>
-    <div class="product-card">
-      <div class="product-name">TreMimic</div>
-      <p class="product-desc jp i18n" data-ja="パーソナルトレーナーに特化したAI指導アシスタント。食事報告への返信からトレーニング記録の管理まで、クライアント対応を自動化し、顧客満足度の向上と業務時間の削減を実現します。" data-en="An AI coaching assistant built for personal trainers. From responding to meal reports to managing training records, it automates client communication to boost satisfaction and save time.">
-        パーソナルトレーナーに特化したAI指導アシスタント。食事報告への返信からトレーニング記録の管理まで、クライアント対応を自動化し、顧客満足度の向上と業務時間の削減を実現します。
-      </p>
-      <a href="https://tremimic.com" class="product-link" target="_blank">tremimic.com</a>
+    <div class="product-grid">
+      <!-- BtoB SaaS -->
+      <div class="product-division i18n" data-ja="BtoB SaaS開発事業" data-en="BtoB SaaS Development">BtoB SaaS開発事業</div>
+      <div class="product-card">
+        <div class="product-name">TreMimic</div>
+        <p class="product-desc jp i18n" data-ja="パーソナルトレーナーに特化したAI指導アシスタント。食事報告への返信からトレーニング記録の管理まで、クライアント対応を自動化し、顧客満足度の向上と業務時間の削減を実現します。" data-en="An AI coaching assistant built for personal trainers. From responding to meal reports to managing training records, it automates client communication to boost satisfaction and save time.">
+          パーソナルトレーナーに特化したAI指導アシスタント。食事報告への返信からトレーニング記録の管理まで、クライアント対応を自動化し、顧客満足度の向上と業務時間の削減を実現します。
+        </p>
+        <a href="https://tremimic.com" class="product-link" target="_blank">tremimic.com</a>
+      </div>
+      <!-- BtoC App -->
+      <div class="product-division i18n" data-ja="BtoC アプリ開発事業" data-en="BtoC App Development">BtoC アプリ開発事業</div>
+      <div class="product-card">
+        <div class="product-name i18n" data-ja="Coming Soon" data-en="Coming Soon">Coming Soon</div>
+        <p class="product-desc jp i18n" data-ja="一般消費者向けのアプリケーション開発事業。AI技術を活用し、日常生活をより豊かにするプロダクトを企画・開発しています。" data-en="Consumer-facing application development. We plan and build products that enrich daily life through AI technology.">
+          一般消費者向けのアプリケーション開発事業。AI技術を活用し、日常生活をより豊かにするプロダクトを企画・開発しています。
+        </p>
+        <span class="product-tag i18n" data-ja="準備中" data-en="In Preparation">準備中</span>
+      </div>
+      <!-- Think Tank -->
+      <div class="product-division i18n" data-ja="シンクタンク事業" data-en="Think Tank">シンクタンク事業</div>
+      <div class="product-card">
+        <div class="product-name i18n" data-ja="AI活用リサーチ" data-en="AI Utilization Research">AI活用リサーチ</div>
+        <p class="product-desc jp i18n" data-ja="「ビジネスにおけるAI活用を最大化する」をテーマにリサーチを推進。企業のAI導入戦略から実装まで、実践的な知見を提供します。" data-en="Under the theme of maximizing AI utilization in business, we drive forward research. We provide practical insights from AI adoption strategy to implementation.">
+          「ビジネスにおけるAI活用を最大化する」をテーマにリサーチを推進。企業のAI導入戦略から実装まで、実践的な知見を提供します。
+        </p>
+      </div>
     </div>
   </section>
 
